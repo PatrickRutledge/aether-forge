@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Aether Forge</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="contact.css">
+</head>
+<body class="contact-page">
+    <div class="crt-container">
+        <div class="crt-frame compact">
+            <div class="crt-bezel">
+                <div class="crt-screen">
+                    <div class="crt-content">
+                        <header class="contact-header-bar">
+                            <nav class="contact-nav">
+                                <a href="index.html" class="nav-link">HOME</a>
+                                <a href="projects.html" class="nav-link">PROJECTS</a>
+                                <a href="contact.html" class="nav-link active">CONTACT</a>
+                            </nav>
+                            <h1 class="contact-title">&gt; ESTABLISH CONNECTION</h1>
+                            <img src="images/aetherforge-1024x1024.png" alt="Aether Forge" class="corner-logo">
+                        </header>
+
+                        <main class="contact-main">
+
+                            <form id="contact-form" action="https://formspree.io/f/xjkrpeoy" method="POST" class="terminal-form">
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <span class="prompt">&gt;</span> NAME:
+                                    </label>
+                                    <input type="text" name="name" class="form-input" required autocomplete="off">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <span class="prompt">&gt;</span> EMAIL:
+                                    </label>
+                                    <input type="email" name="email" class="form-input" required autocomplete="off">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <span class="prompt">&gt;</span> MESSAGE:
+                                    </label>
+                                    <textarea name="message" class="form-textarea" rows="4" required></textarea>
+                                </div>
+
+                                <button type="submit" class="submit-btn">
+                                    <span>TRANSMIT MESSAGE</span>
+                                    <span class="btn-cursor">_</span>
+                                </button>
+                            </form>
+
+                            <div id="thank-you" class="thank-you-message">
+                                <div class="success-icon">✓</div>
+                                <p class="success-text">MESSAGE TRANSMITTED SUCCESSFULLY</p>
+                                <p class="success-subtext">Connection established. Response incoming...</p>
+                                <div class="address-block">
+                                    <p class="address-header">RETURN SIGNAL ORIGIN:</p>
+                                    <p class="address-line">Post Office Box 52</p>
+                                    <p class="address-line">Birmingham, Alabama 35201</p>
+                                    <p class="address-line">United States of America</p>
+                                </div>
+                            </div>
+                        </main>
+
+                        <footer class="contact-footer">
+                            <div class="status-bar">
+                                <span id="status-text">READY</span>
+                                <span class="blink">█</span>
+                            </div>
+                        </footer>
+                    </div>
+
+                    <div class="crt-overlay"></div>
+                    <div class="crt-scanlines"></div>
+                </div>
+
+                <div class="monitor-controls">
+                    <div class="control-button"></div>
+                    <div class="control-button"></div>
+                    <div class="control-button"></div>
+                    <div class="power-led"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="contact.js"></script>
+</body>
+</html>
