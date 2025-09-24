@@ -8,12 +8,28 @@
     <style>
         .privacy-container {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 2rem auto;
             padding: 2rem;
             background: #1a1a1a;
             color: #00ff00;
             font-family: 'Courier New', monospace;
             line-height: 1.6;
+            min-height: calc(100vh - 200px);
+        }
+        
+        body.projects-page {
+            background: #000;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        body.projects-page main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
         }
         
         .privacy-header {
@@ -133,8 +149,9 @@
         <div class="header-scanlines"></div>
     </header>
 
-    <main class="privacy-container">
-        <a href="projects.html" class="back-link">← Back to Projects</a>
+    <main>
+        <div class="privacy-container">
+            <a href="projects.html" class="back-link">← Back to Projects</a>
         
         <div class="privacy-header">
             <h1>Privacy Policy for Spoken</h1>
@@ -202,6 +219,7 @@
         <hr>
         
         <p class="footer-note">This privacy policy was last updated on December 2024.</p>
+        </div>
     </main>
 
     <script src="script.js"></script>
