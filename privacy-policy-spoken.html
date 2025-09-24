@@ -6,155 +6,144 @@
     <title>Privacy Policy - Spoken | Aether Forge</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* Reset and override all inherited styles */
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            background: #000 !important;
+            font-family: 'Courier New', monospace !important;
+        }
+        
+        main {
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 !important;
+            padding: 20px !important;
+            box-sizing: border-box !important;
+            background: #000 !important;
+            display: block !important;
+            position: static !important;
+        }
+        
         .privacy-container {
             max-width: 800px !important;
-            margin: 2rem auto !important;
+            margin: 0 auto !important;
             padding: 2rem !important;
             background: #1a1a1a !important;
             color: #00ff00 !important;
             font-family: 'Courier New', monospace !important;
             line-height: 1.6 !important;
-            min-height: calc(100vh - 200px) !important;
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            position: relative !important;
-            z-index: 1000 !important;
-        }
-        
-        body.projects-page {
-            background: #000 !important;
-            min-height: 100vh;
-        }
-        
-        body.projects-page main {
-            display: block !important;
+            box-sizing: border-box !important;
             width: 100% !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            background: #000 !important;
-        }
-        
-        /* Override any inherited styles that might be hiding content */
-        .privacy-container * {
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-        
-        .privacy-container ul {
-            display: block !important;
-        }
-        
-        .privacy-container li {
-            display: list-item !important;
-        }
-        
-        .privacy-container a {
-            display: inline !important;
+            position: static !important;
         }
         
         .privacy-header {
-            text-align: center;
-            border-bottom: 2px solid #00ff00;
-            padding-bottom: 2rem;
-            margin-bottom: 2rem;
+            text-align: center !important;
+            border-bottom: 2px solid #00ff00 !important;
+            padding-bottom: 2rem !important;
+            margin-bottom: 2rem !important;
         }
         
         .privacy-header h1 {
-            color: #00ff00;
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 10px #00ff00;
+            color: #00ff00 !important;
+            font-size: 2.5rem !important;
+            margin-bottom: 0.5rem !important;
+            text-shadow: 0 0 10px #00ff00 !important;
         }
         
         .effective-date {
-            color: #00cccc;
-            font-size: 1.1rem;
-            font-weight: bold;
+            color: #00cccc !important;
+            font-size: 1.1rem !important;
+            font-weight: bold !important;
         }
         
         .privacy-section {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            border: 1px solid #00ff00;
-            border-radius: 8px;
-            background: rgba(0, 255, 0, 0.05);
+            margin-bottom: 2rem !important;
+            padding: 1.5rem !important;
+            border: 1px solid #00ff00 !important;
+            border-radius: 8px !important;
+            background: rgba(0, 255, 0, 0.05) !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
         }
         
         .privacy-section h2 {
-            color: #00cccc;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 5px #00cccc;
+            color: #00cccc !important;
+            font-size: 1.8rem !important;
+            margin-bottom: 1rem !important;
+            text-shadow: 0 0 5px #00cccc !important;
         }
         
         .privacy-section h3 {
-            color: #ffff00;
-            font-size: 1.4rem;
-            margin-bottom: 0.8rem;
-            margin-top: 1.5rem;
+            color: #ffff00 !important;
+            font-size: 1.4rem !important;
+            margin-bottom: 0.8rem !important;
+            margin-top: 1.5rem !important;
         }
         
         .privacy-section p {
-            margin-bottom: 1rem;
+            margin-bottom: 1rem !important;
+            color: #00ff00 !important;
         }
         
         .privacy-section ul {
-            margin-left: 2rem;
+            margin-left: 2rem !important;
+            color: #00ff00 !important;
         }
         
         .privacy-section li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.5rem !important;
+            color: #00ff00 !important;
         }
         
         .contact-info {
-            background: rgba(0, 204, 204, 0.1);
-            border: 1px solid #00cccc;
+            background: rgba(0, 204, 204, 0.1) !important;
+            border: 1px solid #00cccc !important;
         }
         
         .back-link {
-            display: inline-block;
-            color: #00ff00;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border: 1px solid #00ff00;
-            border-radius: 4px;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
+            display: inline-block !important;
+            color: #00ff00 !important;
+            text-decoration: none !important;
+            padding: 0.5rem 1rem !important;
+            border: 1px solid #00ff00 !important;
+            border-radius: 4px !important;
+            margin-bottom: 2rem !important;
+            transition: all 0.3s ease !important;
         }
         
         .back-link:hover {
-            background: #00ff00;
-            color: #000;
-            text-shadow: none;
+            background: #00ff00 !important;
+            color: #000 !important;
+            text-shadow: none !important;
         }
         
         .highlight {
-            color: #ffff00;
-            font-weight: bold;
+            color: #ffff00 !important;
+            font-weight: bold !important;
         }
         
         a {
-            color: #00cccc;
-            text-decoration: underline;
+            color: #00cccc !important;
+            text-decoration: underline !important;
         }
         
         a:hover {
-            color: #ffff00;
+            color: #ffff00 !important;
         }
         
         hr {
-            border: none;
-            border-top: 1px solid #00ff00;
-            margin: 2rem 0;
+            border: none !important;
+            border-top: 1px solid #00ff00 !important;
+            margin: 2rem 0 !important;
         }
         
         .footer-note {
-            font-style: italic;
-            color: #888;
-            text-align: center;
-            margin-top: 2rem;
+            font-style: italic !important;
+            color: #888 !important;
+            text-align: center !important;
+            margin-top: 2rem !important;
         }
     </style>
 </head>
