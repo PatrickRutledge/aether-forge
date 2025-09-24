@@ -4,38 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - Spoken | Aether Forge</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Reset and override all inherited styles */
-        body {
-            margin: 0 !important;
-            padding: 0 !important;
-            background: #000 !important;
-            font-family: 'Courier New', monospace !important;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
-        main {
-            width: 100% !important;
-            max-width: none !important;
-            margin: 0 !important;
-            padding: 20px !important;
-            box-sizing: border-box !important;
-            background: #000 !important;
-            display: block !important;
-            position: static !important;
+        body {
+            background: #000;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .simple-header {
+            background: #1a1a1a;
+            padding: 1rem 2rem;
+            border-bottom: 2px solid #00ff00;
+        }
+        
+        .simple-header h1 {
+            color: #00ff00;
+            font-size: 2rem;
+            text-align: center;
         }
         
         .privacy-container {
-            max-width: 800px !important;
-            margin: 0 auto !important;
-            padding: 2rem !important;
-            background: #1a1a1a !important;
-            color: #00ff00 !important;
-            font-family: 'Courier New', monospace !important;
-            line-height: 1.6 !important;
-            box-sizing: border-box !important;
-            width: 100% !important;
-            position: static !important;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #000;
+            color: #00ff00;
         }
         
         .privacy-header {
@@ -147,22 +149,13 @@
         }
     </style>
 </head>
-<body class="projects-page">
-    <header class="crt-header-bar">
-        <div class="header-content">
-            <img src="images/aetherforge-1472x704.png" alt="Aether Forge" class="header-logo">
-            <nav class="header-nav">
-                <a href="index.html" class="nav-link">HOME</a>
-                <a href="projects.html" class="nav-link">PROJECTS</a>
-                <a href="contact.html" class="nav-link">CONTACT</a>
-            </nav>
-        </div>
-        <div class="header-scanlines"></div>
-    </header>
+<body>
+    <div class="simple-header">
+        <h1>🔒 Privacy Policy - Spoken</h1>
+    </div>
 
-    <main>
-        <div class="privacy-container">
-            <a href="projects.html" class="back-link">← Back to Projects</a>
+    <div class="privacy-container">
+        <a href="projects.html" class="back-link">← Back to Projects</a>
         
         <div class="privacy-header">
             <h1>Privacy Policy for Spoken</h1>
@@ -230,9 +223,6 @@
         <hr>
         
         <p class="footer-note">This privacy policy was last updated on December 2024.</p>
-        </div>
-    </main>
-
-    <script src="script.js"></script>
+    </div>
 </body>
 </html>
