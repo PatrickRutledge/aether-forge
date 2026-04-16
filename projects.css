@@ -144,7 +144,7 @@ body.projects-page {
     cursor: pointer;
     display: flex;
     align-items: center;
-    height: 200px;
+    min-height: 200px;
 }
 
 .project-tile:hover {
