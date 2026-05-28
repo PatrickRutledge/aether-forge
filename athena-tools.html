@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pallas — Athena Tools for Claude Code | Aether Forge</title>
+    <meta name="description" content="Senior athenahealth integration engineer for Claude Code. Catches data-loss bugs in Snowflake DataView and athenaOne API code before they ship.">
+    <style>
+        :root {
+            --cream: #faf9f6;
+            --cream-warm: #f5f4ef;
+            --paper: #ffffff;
+            --ink: #1c1c1c;
+            --ink-soft: #4a4a4a;
+            --ink-mute: #7a7676;
+            --coral: #cc785c;
+            --coral-deep: #b15a3d;
+            --coral-soft: #f4e3db;
+            --amber: #d97757;
+            --line: #e8e4dc;
+            --terminal-bg: #1a1a1a;
+            --terminal-text: #e6e2d8;
+            --terminal-prompt: #cc785c;
+            --terminal-comment: #6a6a6a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--cream);
+            color: var(--ink);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", system-ui, sans-serif;
+            font-size: 16px;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: var(--coral-deep);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s ease;
+        }
+        a:hover { border-bottom-color: var(--coral-deep); }
+
+        code, .mono {
+            font-family: "SF Mono", "Monaco", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+            font-size: 0.92em;
+        }
+
+        .top-nav {
+            background: var(--paper);
+            border-bottom: 1px solid var(--line);
+            padding: 0.9rem 0;
+        }
+        .top-nav-inner {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .top-nav a {
+            color: var(--ink);
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-bottom: none;
+        }
+        .top-nav a:hover { color: var(--coral-deep); }
+        .top-nav-back {
+            font-size: 0.85rem;
+            color: var(--ink-mute) !important;
+        }
+        .top-nav-links { display: flex; gap: 1.5rem; }
+
+        .hero {
+            background: var(--paper);
+            border-bottom: 1px solid var(--line);
+            padding: 3.5rem 1.5rem 3rem;
+        }
+        .hero-inner {
+            max-width: 1080px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        @media (min-width: 768px) {
+            .hero-inner { grid-template-columns: 1.5fr 1fr; align-items: start; }
+        }
+
+        .hero-title {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 0.5rem;
+        }
+        .hero-title .accent { color: var(--coral); }
+        .hero-tagline {
+            font-size: 1.18rem;
+            color: var(--ink-soft);
+            margin-bottom: 1.5rem;
+            max-width: 38em;
+        }
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1.2rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--ink-mute);
+            align-items: center;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.18rem 0.55rem;
+            border-radius: 4px;
+            background: var(--coral-soft);
+            color: var(--coral-deep);
+            font-size: 0.78rem;
+            font-weight: 500;
+        }
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--ink);
+            color: var(--paper) !important;
+            padding: 0.7rem 1.3rem;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-bottom: none !important;
+            transition: background 0.15s ease;
+        }
+        .hero-cta:hover { background: var(--coral-deep); }
+        .hero-cta-secondary {
+            background: transparent;
+            color: var(--ink) !important;
+            border: 1px solid var(--line);
+            margin-left: 0.6rem;
+        }
+        .hero-cta-secondary:hover {
+            background: var(--cream-warm);
+            border-color: var(--ink-mute);
+        }
+
+        .install-card {
+            background: var(--terminal-bg);
+            color: var(--terminal-text);
+            border-radius: 8px;
+            padding: 1.1rem 1.3rem;
+            font-family: "SF Mono", "Monaco", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+            font-size: 0.88rem;
+            line-height: 1.7;
+            box-shadow: 0 6px 24px -8px rgba(0,0,0,0.25);
+        }
+        .install-card-label {
+            color: var(--terminal-comment);
+            font-size: 0.78rem;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .install-card .prompt { color: var(--terminal-prompt); }
+        .install-card .comment { color: var(--terminal-comment); }
+
+        section {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            border-bottom: 1px solid var(--line);
+        }
+        section:last-of-type { border-bottom: none; }
+
+        section h2 {
+            font-size: 1.65rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+        }
+        section .section-lead {
+            color: var(--ink-soft);
+            margin-bottom: 1.8rem;
+            max-width: 48em;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .feature {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 1.4rem;
+            transition: border-color 0.15s ease, transform 0.15s ease;
+        }
+        .feature:hover {
+            border-color: var(--coral);
+            transform: translateY(-2px);
+        }
+        .feature h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--ink);
+        }
+        .feature p {
+            color: var(--ink-soft);
+            font-size: 0.94rem;
+        }
+
+        table.command-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.93rem;
+        }
+        table.command-table th,
+        table.command-table td {
+            text-align: left;
+            padding: 0.7rem 0.9rem;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+        table.command-table th {
+            font-weight: 600;
+            color: var(--ink-mute);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            background: var(--cream-warm);
+        }
+        table.command-table td:first-child {
+            white-space: nowrap;
+        }
+        table.command-table td:first-child code {
+            background: var(--coral-soft);
+            color: var(--coral-deep);
+            padding: 0.18rem 0.45rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .tool-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .tool-pill {
+            display: inline-block;
+            background: var(--paper);
+            border: 1px solid var(--line);
+            color: var(--ink);
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            font-family: "SF Mono", "Monaco", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+            font-size: 0.82rem;
+        }
+        .tool-pill.new {
+            background: var(--coral-soft);
+            border-color: var(--coral);
+            color: var(--coral-deep);
+            font-weight: 500;
+        }
+
+        .stat-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .stat {
+            text-align: center;
+            padding: 1rem;
+        }
+        .stat-num {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--coral);
+            line-height: 1;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.02em;
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--ink-mute);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        ol.setup-steps {
+            list-style: none;
+            counter-reset: step;
+            margin-top: 1rem;
+        }
+        ol.setup-steps li {
+            counter-increment: step;
+            padding: 1.1rem 0 1.1rem 3rem;
+            position: relative;
+            border-bottom: 1px solid var(--line);
+        }
+        ol.setup-steps li:last-child { border-bottom: none; }
+        ol.setup-steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 1.1rem;
+            width: 2rem;
+            height: 2rem;
+            background: var(--coral-soft);
+            color: var(--coral-deep);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        ol.setup-steps strong {
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+        ol.setup-steps p {
+            color: var(--ink-soft);
+            font-size: 0.94rem;
+        }
+        ol.setup-steps pre {
+            background: var(--terminal-bg);
+            color: var(--terminal-text);
+            padding: 0.7rem 1rem;
+            border-radius: 6px;
+            font-family: "SF Mono", "Monaco", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+            font-size: 0.85rem;
+            margin: 0.7rem 0;
+            overflow-x: auto;
+        }
+
+        .links-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .link-card {
+            display: block;
+            padding: 1rem 1.2rem;
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            color: var(--ink) !important;
+            border-bottom: 1px solid var(--line) !important;
+            transition: border-color 0.15s ease, transform 0.15s ease;
+        }
+        .link-card:hover {
+            border-color: var(--coral) !important;
+            transform: translateY(-1px);
+        }
+        .link-card-label {
+            font-size: 0.78rem;
+            color: var(--ink-mute);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.2rem;
+        }
+        .link-card-text {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            background: var(--cream-warm);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            color: var(--ink-mute);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+        }
+        footer a { color: var(--ink-mute); }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="top-nav-inner">
+            <a href="projects.html" class="top-nav-back">← Aether Forge / Projects</a>
+            <div class="top-nav-links">
+                <a href="https://github.com/nous-ehr/claude_pallas_extension" target="_blank">GitHub</a>
+                <a href="https://www.npmjs.com/package/pallas-athena-tools" target="_blank">npm</a>
+                <a href="https://registry.modelcontextprotocol.io/" target="_blank">MCP Registry</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-inner">
+            <div>
+                <h1 class="hero-title">Pallas — <span class="accent">Athena Tools</span> for Claude Code</h1>
+                <p class="hero-tagline">
+                    A senior athenahealth integration engineer embedded in your Claude Code workflow.
+                    Catches data-loss bugs in Snowflake DataView and athenaOne API code before they ship.
+                </p>
+                <div class="hero-meta">
+                    <span class="hero-badge">v0.2.0</span>
+                    <span>by Aether Forge</span>
+                    <span>·</span>
+                    <span>MIT licensed</span>
+                    <span>·</span>
+                    <span>12 MCP tools · 9 slash commands</span>
+                </div>
+                <div>
+                    <a href="#install" class="hero-cta">Install</a>
+                    <a href="https://github.com/nous-ehr/claude_pallas_extension" target="_blank" class="hero-cta hero-cta-secondary">View source</a>
+                </div>
+            </div>
+            <div class="install-card" id="install">
+                <div class="install-card-label">Quick install</div>
+                <div><span class="prompt">$</span> npx pallas-athena-tools setup</div>
+                <div class="comment"># installs MCP server, slash commands,</div>
+                <div class="comment"># and safety persona to ~/.claude/</div>
+                <br>
+                <div class="install-card-label">Or via Claude Code marketplace</div>
+                <div><span class="prompt">/</span>plugin install athena-tools@claude-community</div>
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <h2>What it does</h2>
+        <p class="section-lead">
+            Pallas embeds itself in Claude Code as a senior athenahealth integration engineer.
+            It does not just answer questions — it proactively protects you from the data-loss
+            patterns and compliance mistakes that even experienced developers make against the
+            athenaOne, DataView, and FHIR R4 surface.
+        </p>
+        <div class="feature-grid">
+            <div class="feature">
+                <h3>Proactive safety</h3>
+                <p>
+                    Flags <code>PATIENTID = CHARTID</code> joins (46% silent data loss),
+                    missing <code>DELETEDDATETIME</code> filters, missing CONTEXTID for service
+                    accounts, hardcoded credentials, and API code without rate-limit retry.
+                </p>
+            </div>
+            <div class="feature">
+                <h3>Teaches the "why"</h3>
+                <p>
+                    Doesn't just say "add this filter." Explains the clinical, regulatory, or
+                    architectural reason behind every safety rule, so the lesson sticks across
+                    the next ten projects.
+                </p>
+            </div>
+            <div class="feature">
+                <h3>Curated knowledge base</h3>
+                <p>
+                    828 DataView views with descriptions, 16K+ columns, 1.3K foreign-key
+                    relationships, 1.9K API/FHIR/workflow docs, plus identity patterns and
+                    gotchas accumulated from real integration work.
+                </p>
+            </div>
+            <div class="feature">
+                <h3>Learning loop</h3>
+                <p>
+                    Every interaction feeds back. Low-risk patterns auto-merge into the KB;
+                    high-risk schema discoveries queue for human review. The tool gets smarter
+                    from every developer's hard-won lessons.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Knowledge base</h2>
+        <p class="section-lead">Verified athenahealth schema and workflow knowledge, all queryable in-editor.</p>
+        <div class="stat-row">
+            <div class="stat"><div class="stat-num">828</div><div class="stat-label">DataView views</div></div>
+            <div class="stat"><div class="stat-num">16,183</div><div class="stat-label">Columns</div></div>
+            <div class="stat"><div class="stat-num">1,299</div><div class="stat-label">FK relationships</div></div>
+            <div class="stat"><div class="stat-num">1,943</div><div class="stat-label">API + workflow docs</div></div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Slash commands</h2>
+        <p class="section-lead">Type any of these in Claude Code to launch a guided workflow.</p>
+        <table class="command-table">
+            <thead><tr><th>Command</th><th>Description</th></tr></thead>
+            <tbody>
+                <tr><td><code>/onboard</code></td><td>Guided onboarding for new athenahealth developers (DataView, API, FHIR, or Marketplace tracks)</td></tr>
+                <tr><td><code>/sql</code></td><td>Generate safe DataView SQL — CONTEXTID, soft-delete, and verified joins baked in</td></tr>
+                <tr><td><code>/athena-api</code></td><td>Generate API integration code — OAuth2, rate-limit retry, structured error handling</td></tr>
+                <tr><td><code>/diagnose</code></td><td>Root-cause analysis of an athena error with fix instructions and prevention guidance</td></tr>
+                <tr><td><code>/review-athena</code></td><td>Scan a project for anti-patterns and safety issues</td></tr>
+                <tr><td><code>/validate</code></td><td>Pre-deployment safety check with critical/warning/info report</td></tr>
+                <tr><td><code>/explain</code></td><td>Deep-dive on any athena concept — CONTEXTID, PATIENT vs CHART, soft-delete, etc.</td></tr>
+                <tr><td><code>/workflow</code></td><td>End-to-end clinical/admin workflow guidance — scheduling, claims, lab results, etc.</td></tr>
+                <tr><td><code>/review-candidates</code></td><td>Maintainers: approve or reject KB update candidates from the learning loop</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>MCP tools</h2>
+        <p class="section-lead">
+            Twelve tools Claude can call directly. The first nine query and write to the knowledge base;
+            the last three power the telemetry-driven learning loop (new in v0.2.0).
+        </p>
+        <div class="tool-pills">
+            <span class="tool-pill">athena_search_kb</span>
+            <span class="tool-pill">athena_explain_view</span>
+            <span class="tool-pill">athena_explain_join</span>
+            <span class="tool-pill">athena_diagnose_error</span>
+            <span class="tool-pill">athena_explain_workflow</span>
+            <span class="tool-pill">athena_suggest_workflow</span>
+            <span class="tool-pill">athena_submit_feedback</span>
+            <span class="tool-pill">athena_list_candidates</span>
+            <span class="tool-pill">athena_review_candidate</span>
+            <span class="tool-pill new">athena_report_safety_flag</span>
+            <span class="tool-pill new">athena_report_outcome</span>
+            <span class="tool-pill new">athena_command_start</span>
+        </div>
+    </section>
+
+    <section>
+        <h2>Setup</h2>
+        <ol class="setup-steps">
+            <li>
+                <strong>Install via Claude Code marketplace</strong>
+                <p>From inside Claude Code:</p>
+                <pre>/plugin install athena-tools@claude-community</pre>
+            </li>
+            <li>
+                <strong>Or install via npm (user-level config)</strong>
+                <p>From any terminal:</p>
+                <pre>npx pallas-athena-tools setup</pre>
+                <p>Installs MCP server config, 9 slash commands, and the safety persona into <code>~/.claude/</code>. Works in every project.</p>
+            </li>
+            <li>
+                <strong>Verify</strong>
+                <p>Open Claude Code and ask:</p>
+                <pre>Use athena_explain_view on the PATIENT view</pre>
+                <p>You should see all 113 columns, the PII flags, the soft-delete requirement, and the PATIENTID/CHARTID identity warning.</p>
+            </li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Who this is for</h2>
+        <p class="section-lead">Developers and teams building serious integrations against athenahealth.</p>
+        <div class="feature-grid">
+            <div class="feature">
+                <h3>Digital health companies</h3>
+                <p>Engineering teams at companies integrating with athenaOne — patient experience, billing automation, care coordination, RPM, and adjacent tools.</p>
+            </div>
+            <div class="feature">
+                <h3>Healthcare consultancies</h3>
+                <p>Firms doing athena implementations who want to compress training time and ship integrations faster without sacrificing safety.</p>
+            </div>
+            <div class="feature">
+                <h3>Practices with in-house engineering</h3>
+                <p>Large practices and health systems building custom DataView reports, API integrations, and clinical workflow automations.</p>
+            </div>
+            <div class="feature">
+                <h3>New athena developers</h3>
+                <p>Engineers absorbing the athena data model, identity patterns, and safety constraints without a three-month learning curve.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Links</h2>
+        <div class="links-row">
+            <a class="link-card" href="https://github.com/nous-ehr/claude_pallas_extension" target="_blank">
+                <div class="link-card-label">Source</div>
+                <div class="link-card-text">GitHub repository</div>
+            </a>
+            <a class="link-card" href="https://www.npmjs.com/package/pallas-athena-tools" target="_blank">
+                <div class="link-card-label">npm</div>
+                <div class="link-card-text">pallas-athena-tools</div>
+            </a>
+            <a class="link-card" href="https://registry.modelcontextprotocol.io/" target="_blank">
+                <div class="link-card-label">MCP Registry</div>
+                <div class="link-card-text">io.github.nous-ehr/athena-tools</div>
+            </a>
+            <a class="link-card" href="privacy-policy-pallas.html">
+                <div class="link-card-label">Privacy</div>
+                <div class="link-card-text">Privacy policy</div>
+            </a>
+            <a class="link-card" href="https://github.com/nous-ehr/claude_pallas_extension/issues" target="_blank">
+                <div class="link-card-label">Support</div>
+                <div class="link-card-text">Open an issue</div>
+            </a>
+            <a class="link-card" href="https://marketplace.visualstudio.com/items?itemName=AetherForgeus.athena-tools" target="_blank">
+                <div class="link-card-label">Also available for</div>
+                <div class="link-card-text">VS Code Marketplace</div>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>Pallas — Athena Tools · Made by <a href="index.html">Aether Forge</a> · MIT license (code) · CC BY-NC-SA 4.0 (knowledge base)</p>
+    </footer>
+</body>
+</html>
