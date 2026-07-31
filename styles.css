@@ -517,6 +517,12 @@ body {
 }
 
 @media (max-width: 1024px) {
+    .main-nav {
+        gap: 20px;
+        font-size: 20px;
+        flex-wrap: wrap;
+    }
+
     .typing-container {
         font-size: clamp(24px, 4vw, 36px);
     }

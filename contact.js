@@ -2,9 +2,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('contact-form');
     const thankYou = document.getElementById('thank-you');
     const statusText = document.getElementById('status-text');
+    const formStartedAt = document.getElementById('form-started-at');
+    const MIN_SUBMIT_TIME_MS = 2000;
+
+    if (formStartedAt) {
+        formStartedAt.value = String(Date.now());
+    }
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
+
+        const honeypot = form.querySelector('input[name="_gotcha"]');
+        const startedAt = Number(formStartedAt ? formStartedAt.value : Date.now());
+        const elapsed = Date.now() - startedAt;
+
+        if ((honeypot && honeypot.value.trim() !== '') || elapsed < MIN_SUBMIT_TIME_MS) {
+            statusText.textContent = 'TRANSMISSION FILTERED';
+            statusText.style.color = '#ff0066';
+
+            setTimeout(() => {
+                statusText.textContent = 'READY FOR INPUT';
+                statusText.style.color = '#00ff66';
+            }, 2500);
+
+            return;
+        }
 
         statusText.textContent = 'TRANSMITTING...';
         statusText.style.color = '#ffff00';
